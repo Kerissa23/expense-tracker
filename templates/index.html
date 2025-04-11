@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Budget Tracker</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -14,6 +14,16 @@
     <header>
       <h1>Budget Tracker</h1>
       <p>Track your expenses and stay on budget</p>
+      <div class="header-right">
+        <a href="/past-expenses" class="past-expense-btn">📅</a>
+      </div>
+      <div class="profile-menu">
+        <img src="{{ session['profile_pic_url'] }}" alt="Profile" class="profile-pic" id="profileBtn">
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="/logout">Sign Out</a>
+        </div>
+      </div>
+      
     </header>
 
     <!-- Budget Section -->
@@ -25,13 +35,14 @@
       </form>
 
       <div class="budget-summary">
-        <p><strong>Total Budget:</strong> ₹<span id="total-budget">0.00</span></p>
-        <p><strong>Total Expense:</strong> ₹<span id="total-expense">0.00</span></p>
-        <p><strong>Remaining:</strong> ₹<span id="remaining">0.00</span></p>
+        <p><strong>Total Budget:</strong> ₹<span id="total-budget">{{ total_budget | round(2) }}</span></p>
+        <p><strong>Total Expense:</strong> ₹<span id="total-expense">{{ total_expense | round(2) }}</span></p>
+        <p><strong>Remaining:</strong> ₹<span id="remaining">{{ remaining | round(2) }}</span></p>
       </div>
+      
 
       <button id="open-modal">Add Expense</button>
-      <button id="open-settings" style="margin-left: 10px;">⚙️ Settings</button>
+      <button id="open-settings">Settings</button>
     </section>
 
     <!-- Expenses List Section -->
@@ -45,9 +56,16 @@
       <h2>Category Breakdown</h2>
       <div class="chart-container">
         <canvas id="categoryChart"></canvas>
+        <div class="insights" style="padding: 1rem;">
+          <h3>🔍 Expense Highlights</h3>
+          <p id="most-expensive"></p>
+          <p id="least-expensive"></p>
+        </div>
       </div>
     </section>
   </div>
+  
+  
 
   <!-- Expense Modal -->
   <div class="modal hidden" id="expense-modal">
@@ -86,7 +104,17 @@
   <footer>
     &copy; 2025 Budget Tracker. All rights reserved.
   </footer>
+  <script>
+    // Parse server-rendered expenses into JS
+    const initialExpenses = {{ expenses | tojson }};
+  </script>
 
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <div id="budget-alert" class="alert-modal hidden">
+    <div class="alert-box">
+      <p>⚠️ <strong>Warning:</strong> You have exceeded your budget!</p>
+      <button id="close-alert">  Close</button>
+    </div>
+  </div>
 </body>
 </html>

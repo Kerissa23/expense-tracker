@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Budget Tracker</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #eecda3, #ef629f, #a18cd1, #fbc2eb);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.login-container {
+  background: #ffffffdd;
+  padding: 50px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+  max-height: 90vh; /* Prevents box from overflowing vertically */
+  overflow-y: auto;  /* Adds scroll if content is too tall */
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0s;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: popIn 0.8s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeSlideUp 0.8s ease forwards;
+  animation-delay: 0.9s;
+}
+
+.login-container a {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideUpFade 0.8s ease forwards;
+  animation-delay: 1.3s;
+}
+
+.login-container button {
+  background-color: #4285f4;
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #357ae8;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.header img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.header h1 {
+  font-size: 28px;
+  color: #333;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .description {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .login-container button {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  .header img {
+    width: 30px;
+    margin-right: 8px;
+  }
+
+  body {
+    padding: 10px;
+    align-items: center; /* ✅ Center vertically */
+    justify-content: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="header">
+      <img src="static/assets/icons/award.svg" alt="Icon" />
+      <h1>Budget Tracker</h1>
+    </div>
+    
+    <p class="description">
+      Track your expenses, manage your budget, and visualize your spending habits.
+    </p>
+    
+    <a href="/login">
+      <button>Sign in with Google</button>
+    </a>
+  </div>
+
+</body>
+</html>
