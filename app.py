@@ -262,6 +262,12 @@ def past_expenses():
 
     return render_template("past_expenses.html", chart_data=chart_data, grouped_expenses=grouped)
 
+@app.route('/initdb')
+def initdb():
+    with app.app_context():
+        db.create_all()
+    return "Database tables created!"
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
